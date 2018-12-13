@@ -121,7 +121,7 @@ namespace WindowsFormsApp9
                 this.Cursor = Cursors.Hand;
             }
         }
-        //
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (flagmousebutton == true)
@@ -130,8 +130,7 @@ namespace WindowsFormsApp9
                 this.Cursor = Cursors.Default;
             }
         }
-        int countx = 0;
-        int county = 0;
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             Control control = (Control)sender;
@@ -139,8 +138,7 @@ namespace WindowsFormsApp9
             {
                 int dx = e.X - mouseX;
                 int dy = e.Y - mouseY;
-                countx += dx;
-                county += dy;
+
                 int sumx = control.Height - control.Height / 2;
                 
                 //if (pictureBox1.Location.X <= label1.Location.X + pictureBox1.Location.X/10)
@@ -222,36 +220,38 @@ namespace WindowsFormsApp9
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (trackBar1.Value >= 13 || trackBar1.Value <= 1)
+            if (trackBar1.Value >= 14 || trackBar1.Value < 1)
                 MessageBox.Show("Заполните, пожалуйста, все поля");
             else
             {
+                Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
+                H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
 
-                if (button1.BackColor == button2.BackColor) MessageBox.Show("Внимание, начальные и конечные цвета совпадают");
-                var map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
-                g = Graphics.FromImage(map); //Подключаем графику
-                g.Clear(Color.Black);
                 /*
                 T_fractal T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
                 PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
                 T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
                 pictureBox1.BackgroundImage = map;
                 pictureBox1.Image = map;
-                */
+
                 /*
                 H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
                 H.Draw(pictureBox1.Size.Height/2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4);
                 pictureBox1.BackgroundImage = map;
                 pictureBox1.Image = map;
                 */
-                O_fractal O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-                O.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+                /*
+                O_fractal T = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                PointF A = new PointF(0, 0);
+                T.Draw(A, pictureBox1.Height, iter);
                 pictureBox1.BackgroundImage = map;
                 pictureBox1.Image = map;
+                */
+
             }
-                
-               
+
+
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -277,23 +277,19 @@ namespace WindowsFormsApp9
             pictureBox2.Width = control.Size.Height;
             pictureBox2.Height = control.Size.Height;
             /*
-            var map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
-            g = Graphics.FromImage(map); //Подключаем графику
-            g.Clear(Color.Black);
-            T_fractal T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-            PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-            T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-            pictureBox1.BackgroundImage = map;
-            pictureBox1.Image = map;
-            */
-            var map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
-            g = Graphics.FromImage(map); //Подключаем графику
-            g.Clear(Color.Black);
-            O_fractal O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-            PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-            O.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-            pictureBox1.BackgroundImage = map;
-            pictureBox1.Image = map;
+           var map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
+           g = Graphics.FromImage(map); //Подключаем графику
+           g.Clear(Color.Black);
+           T_fractal T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+           PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+           T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+           pictureBox1.BackgroundImage = map;
+           pictureBox1.Image = map;
+
+           */
+
+           
+
         }
 
 

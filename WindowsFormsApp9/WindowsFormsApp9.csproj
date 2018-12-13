@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Fractal.cs" />
     <Compile Include="H-fractal.cs" />
+    <Compile Include="MyFractal.cs" />
     <Compile Include="O-fractal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

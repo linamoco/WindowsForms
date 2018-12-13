@@ -61,8 +61,14 @@ namespace WindowsFormsApp9
         {
             return 0;
         }
-
-     
+        virtual public int Draw(int x, int y, double a, double b, Pen p)
+        {
+            return 0;
+        }
+        virtual public int Draw(int x1, int y1, int razm_f)
+        {
+            return 0;
+        }
 
     }
 }
