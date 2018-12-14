@@ -18,11 +18,17 @@ namespace WindowsFormsApp9
             this.EndColor = EndColor;
             this.grafika = g;
         }
+        /// <summary>
+        /// Создает массив цветов, которыми нужно сделать графиент
+        /// </summary>
+        /// <returns>массив цветов</returns>
         public Color[] Grad()
         {
+            // массив цветов
             var colorArr = new Color[Iter];
             if (Iter != 1)
             {
+                // разложение конечного и начальноого цвета на составляющие
                 int rMax = EndColor.R;
                 int rMin = StartColor.R;
                 int gMax = EndColor.G;
@@ -33,16 +39,20 @@ namespace WindowsFormsApp9
                 for (int i = 0; i < Iter; i++)
 
                 {
+               
                     var rAverage = rMin + (int)((rMax - rMin) * i / (Iter - 1));
                     var gAverage = gMin + (int)((gMax - gMin) * i / (Iter - 1));
                     var bAverage = bMin + (int)((bMax - bMin) * i / (Iter - 1));
+                    // восстановить цвет по составляющим 
                     colorArr[i] = (Color.FromArgb(rAverage, gAverage, bAverage));
                 }
+                //цвета записали в обратном порядке, поэтому надо восстановить порядок
                 Array.Reverse(colorArr);
                 
             }
+            // если итерация всего одна, то просто записываем начальный цвет
             else
-                colorArr[0] = StartColor;
+                colorArr[0] = StartColor; 
             return colorArr;
 
         }

@@ -23,7 +23,7 @@ namespace WindowsFormsApp9
             }
             //g.FillEllipse
             grafika.FillRectangle(new SolidBrush(colors[iter - 1]), A.X, A.Y, size, size);
-            int d = size / 4; 
+            int d = size / 4; // сторона квадрата следующей операции
             PointF[] coordinates = new PointF[4];  //Координаты левых верхних углов порожденных квадратов
 
             for (int i = 0; i < 4; i++)

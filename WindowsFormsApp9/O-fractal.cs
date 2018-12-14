@@ -32,7 +32,7 @@ namespace WindowsFormsApp9
                grafika.FillEllipse(new SolidBrush(colors[iter - 1]), R);
 
                 
-                float d = (float)(size / 6.0); //Вспомогательная переменная, шестая длины исходного квадрата
+                float d = (float)(size / 6.0); //Радиус круга следующей итерации
                 PointF[] сoordinates = new PointF[7];  //Координаты левых верхних углов порожденных квадратов, а которые вписываются круги
 
                 for (int i = 0; i < 7; i++)

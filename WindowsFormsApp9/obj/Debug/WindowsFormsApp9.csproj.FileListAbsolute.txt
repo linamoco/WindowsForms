@@ -12,12 +12,12 @@ C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\bin\Debug\WindowsFormsApp9.exe
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\bin\Debug\WindowsFormsApp9.pdb
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.csprojAssemblyReference.cache
-C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.Form1.resources
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.Properties.Resources.resources
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.csproj.GenerateResource.cache
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.csproj.CoreCompileInputs.cache
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.exe
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.pdb
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\bin\Debug\az-Cyrl\WindowsFormsApp9.resources.dll
-C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.Form1.az-Cyrl.resources
 C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\az-Cyrl\WindowsFormsApp9.resources.dll
+C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.FractalForm.resources
+C:\Users\sasha\OneDrive\Документы\GitHub\WindowsForms\WindowsFormsApp9\obj\Debug\WindowsFormsApp9.FractalForm.az-Cyrl.resources
