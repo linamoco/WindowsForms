@@ -274,7 +274,7 @@ namespace WindowsFormsApp9
             {
                 O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
                 PointF A = new PointF(0, 0);
-                O.Draw(A, pictureBox1.Height - 60, iter);
+                O.Draw(A, pictureBox1.Height - 70, iter);
             }
             if (comboBox1.SelectedIndex == 1)
             {
