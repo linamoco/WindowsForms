@@ -11,48 +11,51 @@ namespace WindowsFormsApp9
     {
         public H_fractal(int Iter, Color StartColor, Color EndColor, Graphics g) : base(Iter, StartColor, EndColor, g)
         {
-        }
 
-        private void H(int x, int y, int razmer)
+        }
+        //рисует 1 букву Н по заданным координатам ыершин буквы Н
+        private void H(int x, int y, int hight, Color color)
         {
 
 
+            
+            g.DrawLine(new Pen(color, 5), x - hight, y - hight, x - hight, y + hight);
+            g.DrawLine(new Pen(color, 5), x - hight, y, x + hight, y);
+            g.DrawLine(new Pen(color, 5), x + hight, y - hight, x + hight, y + hight);
+        }
+        int x1; int y1;
+        int x2; int y2;
+        int x3; int y3;
+        int x4; int y4;
+        public override int Draw(int x1, int y1, int hight, int iter)
+        {
             Color[] colors = Grad(); //Массив цветов
-            g.DrawLine(new Pen(colors[Iter-1], 5), x - razmer, y - razmer, x - razmer, y + razmer);
-            g.DrawLine(new Pen(colors[Iter-1], 5), x - razmer, y, x + razmer, y);
-            g.DrawLine(new Pen(colors[Iter-1], 5), x + razmer, y - razmer, x + razmer, y + razmer);
-        }
-        int x11; int y11;
-        int x01; int y01;
-        int x00; int y00;
-        int x10; int y10;
-        public override int Draw(int x1, int y1, int razm_f, int iter)
-        {
-           
-            x11 = x1 + razm_f;
-            y11 = y1 + razm_f;
-            x01 = x1 - razm_f;
-            y01 = y1 + razm_f;
-            x10 = x1 + razm_f;
-            y10 = y1 - razm_f;
-            x00 = x1 - razm_f;
-            y00 = y1 - razm_f;
+            this.x1 = x1 + hight;
+            this.y1 = y1 + hight;
+            x2 = x1 - hight;
+            y2 = y1 + hight;
+            x4 = x1 + hight;
+            y4 = y1 - hight;
+            x3 = x1 - hight;
+            y3 = y1 - hight;
 
 
             if (iter <= 1)
             {
 
-                H(x1, y1, razm_f);
-                razm_f = razm_f / 2;
+                H(x1, y1, hight, colors[iter]);
+                hight = hight / 2;
                                     
                 return 0;
             }
             else
             {
-                Draw(x11, y11, razm_f, iter  -1);
-                Draw(x01, y01, razm_f, iter  -1);
-                Draw(x10, y10, razm_f, iter - 1);
-                Draw(x00, y00, razm_f, iter - 1);
+                H(x1, y1, hight, colors[iter]);
+                hight = hight / 2;
+                Draw(this.x1, this.y1, hight, iter  -1);
+                Draw(x2, y2, hight, iter  -1);
+                Draw(x4, y4, hight, iter - 1);
+                Draw(x3, y3, hight, iter - 1);
             }
             return 0;
     

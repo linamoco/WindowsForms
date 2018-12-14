@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace WindowsFormsApp9
 {
     abstract class Fractal
     {
         public Graphics g; //Графика
-
+        public int MaxIter { get; } // количество итераций
         public int Iter { get; } // количество итераций
         public Color StartColor { get; } // Начальный цвет
         public Color EndColor { get; } // Конечный цвет

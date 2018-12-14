@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp9
 {
-    partial class Form1
+    partial class FractalForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -94,11 +94,11 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(146, 122);
-            this.trackBar1.Maximum = 9;
+            this.trackBar1.Location = new System.Drawing.Point(161, 122);
+            this.trackBar1.Maximum = 8;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(116, 45);
+            this.trackBar1.Size = new System.Drawing.Size(101, 45);
             this.trackBar1.TabIndex = 3;
             this.trackBar1.Value = 1;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -278,7 +278,7 @@
             this.label4.Visible = false;
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // Form1
+            // FractalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -297,7 +297,7 @@
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "FractalForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Фракталы";

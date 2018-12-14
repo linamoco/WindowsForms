@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp9
 {
-    public partial class Form1 : Form
+    public partial class FractalForm : Form
     {
-
-        public Form1()
+        // Конструктор класса FractalForm
+        public FractalForm()
         {
             InitializeComponent();
 
@@ -18,9 +18,12 @@ namespace WindowsFormsApp9
 
         }
         // Отвечает за приближение или отдаление 
-        private int zoom = 1;
-        private double zoomfactor = 2;
-        private int iter;
+        private int zoom = 1; // Увеличение в данный момент
+        private double zoomfactor = 2; // На сколько надо увеличить 
+        private int iter; // глубина  рекурсии(задается пользователем)
+        /// <summary>
+        /// Увеличивает масштаб изображения, если колесико мышки прокрутилось вперед
+        /// </summary>
         private void ZoomIn()
         {
             SetZOOMFactor(true);
@@ -29,7 +32,9 @@ namespace WindowsFormsApp9
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * zoomfactor);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-
+        /// <summary>
+        /// Уменьшает масштаб изображения, если колесико мышки прокрутилось назад
+        /// </summary>
         private void ZoomOut()
         {
             SetZOOMFactor(false);
@@ -39,7 +44,10 @@ namespace WindowsFormsApp9
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
         }
-
+        /// <summary>
+        /// Определяет, насколько надо увеличить или уменьшить масштаб изображения
+        /// </summary>
+        /// <param name="tmp">показывает, в какую сторону прокрутилось коллесико мышки</param>
         private void SetZOOMFactor(bool tmp)
         {
             if (tmp)
@@ -70,6 +78,7 @@ namespace WindowsFormsApp9
                 if (zoom == 1)
                 {
                     zoomfactor = 1;
+                    // возвратить изображение на первоначальные координаты
                     pictureBox1.Location = pictureBox2.Location;
 
                 }
@@ -94,11 +103,11 @@ namespace WindowsFormsApp9
             }
 
         }
+        // Событие колесика мышки
         private void panel1_MouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
             {
-
                 ZoomIn();
             }
 
@@ -107,41 +116,42 @@ namespace WindowsFormsApp9
                 ZoomOut();
             }
         }
-        bool flagmousebutton = false;
+        bool flagmousebutton = false; // true, если нажата левая кнопка мышки
         int mouseX, mouseY;
+        // Событие нажатия кнопки мышки
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 flagmousebutton = true;
-
-                mouseX = e.X;
+                // координаты мышки при нажатии левой кнопки
+                mouseX = e.X; 
                 mouseY = e.Y;
-
+                // изменить форму курсора
                 this.Cursor = Cursors.Hand;
             }
         }
-
+        // Событие : кнопка мыши была отпущена
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (flagmousebutton == true)
             {
                 flagmousebutton = false;
-                this.Cursor = Cursors.Default;
+                this.Cursor = Cursors.Default; // вернуть курсор в обычный вид
             }
         }
-
+        // передвижение мышки с нажатой кнопкой
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            // Форма
             Control control = (Control)sender;
             if (flagmousebutton == true)
-            {
+            { 
+                // разность старых и новых координат
                 int dx = e.X - mouseX;
                 int dy = e.Y - mouseY;
 
                 int sumx = control.Height - control.Height / 2;
-
-                //if (pictureBox1.Location.X <= label1.Location.X + pictureBox1.Location.X/10)
                 pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
             }
         }
@@ -220,53 +230,24 @@ namespace WindowsFormsApp9
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
+            if(comboBox1.SelectedIndex < 0)
             {
-                /*
-              Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
-              H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-              H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
-              */
-                Bitmap map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
-                Graphics gH = Graphics.FromHwnd(pictureBox1.Handle);
-                g = Graphics.FromImage(map); //Подключаем графику
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;//Включаем сглаживание
-                g.Clear(Color.Black);
-                if (comboBox1.SelectedIndex == 0)
-                {
-                    O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                    PointF A = new PointF(0, 0);
-                    O.Draw(A, pictureBox1.Height - 60, iter);
-                }
-                if (comboBox1.SelectedIndex == 1)
-                {
-                    T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-                    T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-
-                }
-                if (comboBox1.SelectedIndex == 2)
-                {
-                    M = new MyFractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-                    M.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-                }
-                pictureBox1.BackgroundImage = map;
-                pictureBox1.Image = map;
-                if (comboBox1.SelectedIndex == 3)
-                {
-                   
-                    H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, gH);
-                    H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
-                    map = (System.Drawing.Bitmap)pictureBox1.BackgroundImage;
-                    pictureBox1.Image = map;
-                }
-
+                MessageBox.Show("Заполните, пожалуйста, все поля");
             }
-            catch (IndexOutOfRangeException) { MessageBox.Show("Заполните, пожалуйста, все поля"); }
+            else
+            {
+                try
+                {
+
+                    Event();
+
+                }
+                catch (IndexOutOfRangeException) { MessageBox.Show("Заполните, пожалуйста, все поля"); }
+            }
+            
 
         }
-
+        
         O_fractal O;
         T_fractal T;
         MyFractal M;
@@ -281,20 +262,50 @@ namespace WindowsFormsApp9
         {
 
         }
+        public void Event()
+        {
 
+            Bitmap map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
+            Graphics gH = Graphics.FromHwnd(pictureBox1.Handle);
+            g = Graphics.FromImage(map); //Подключаем графику
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;//Включаем сглаживание
+            g.Clear(Color.Black);
+            if (comboBox1.SelectedIndex == 0)
+            {
+                O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                PointF A = new PointF(0, 0);
+                O.Draw(A, pictureBox1.Height - 60, iter);
+            }
+            if (comboBox1.SelectedIndex == 1)
+            {
+                T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+                T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+
+            }
+            if (comboBox1.SelectedIndex == 2)
+            {
+                M = new MyFractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+                M.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+            }
+            pictureBox1.BackgroundImage = map;
+            pictureBox1.Image = map;
+            if (comboBox1.SelectedIndex == 3)
+            {
+
+                H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, gH);
+                H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
+                map = (System.Drawing.Bitmap)pictureBox1.BackgroundImage;
+                pictureBox1.Image = map;
+            }
+
+        }
         private void Form1_Resize(object sender, EventArgs e)
         {
             Control control = (Control)sender;
             zoom = 1;
             zoomfactor = 2;
-            /*
-            if (control.Size.Height != control.Size.Width)
-            {
-                control.Size = new Size(control.Size.Height, control.Size.Width);
-            }
-            */
-
-
             panel1.Width = control.Size.Height;
             panel1.Height = control.Size.Height;
             pictureBox1.Width = control.Size.Height;
@@ -303,46 +314,7 @@ namespace WindowsFormsApp9
             pictureBox2.Height = control.Size.Height;
             try
             {
-                /*
-              Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
-              H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-              H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
-              */
-                Bitmap map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
-                Graphics gH = Graphics.FromHwnd(pictureBox1.Handle);
-                g = Graphics.FromImage(map); //Подключаем графику
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;//Включаем сглаживание
-                g.Clear(Color.Black);
-                if (comboBox1.SelectedIndex == 0)
-                {
-                    O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                    PointF A = new PointF(0, 0);
-                    O.Draw(A, pictureBox1.Height - 60, iter);
-                }
-                if (comboBox1.SelectedIndex == 1)
-                {
-                    T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-                    T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-
-                }
-                if (comboBox1.SelectedIndex == 2)
-                {
-                    M = new MyFractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-                    M.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-                }
-                pictureBox1.BackgroundImage = map;
-                pictureBox1.Image = map;
-                if (comboBox1.SelectedIndex == 3)
-                {
-
-                    H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, gH);
-                    H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
-                    map = (System.Drawing.Bitmap)pictureBox1.BackgroundImage;
-                    pictureBox1.Image = map;
-                }
-
+                Event();
             }
             catch (IndexOutOfRangeException) { MessageBox.Show("Заполните, пожалуйста, все поля"); }
 
