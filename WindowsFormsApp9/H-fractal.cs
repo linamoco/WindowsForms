@@ -19,9 +19,9 @@ namespace WindowsFormsApp9
 
 
             
-            g.DrawLine(new Pen(color, 5), x - hight, y - hight, x - hight, y + hight);
-            g.DrawLine(new Pen(color, 5), x - hight, y, x + hight, y);
-            g.DrawLine(new Pen(color, 5), x + hight, y - hight, x + hight, y + hight);
+            grafika.DrawLine(new Pen(color, 5), x - hight, y - hight, x - hight, y + hight);
+            grafika.DrawLine(new Pen(color, 5), x - hight, y, x + hight, y);
+            grafika.DrawLine(new Pen(color, 5), x + hight, y - hight, x + hight, y + hight);
         }
         int x1; int y1;
         int x2; int y2;

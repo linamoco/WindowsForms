@@ -22,11 +22,11 @@ namespace WindowsFormsApp9
             {
 
                 //g.FillRectangle(new SolidBrush(colors[0]), A.X, A.Y, size, size);
-                g.FillEllipse(new SolidBrush(colors[iter - 1]), R);
+                grafika.FillEllipse(new SolidBrush(colors[iter - 1]), R);
                 return 0;
             }
             R = new RectangleF(A.X, A.Y, size, size);
-            g.FillEllipse(new SolidBrush(colors[iter - 1]), R);
+            grafika.FillEllipse(new SolidBrush(colors[iter - 1]), R);
 
             // g.FillRectangle(new SolidBrush(colors[iter - 1]), A.X, A.Y, size, size);
             int d = size / 4; //Вспомогательная переменная, четверть длины исходного квадрата

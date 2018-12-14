@@ -5,7 +5,7 @@ namespace WindowsFormsApp9
 {
     abstract class Fractal
     {
-        public Graphics g; //Графика
+        public Graphics grafika; //Графика
         public int MaxIter { get; } // количество итераций
         public int Iter { get; } // количество итераций
         public Color StartColor { get; } // Начальный цвет
@@ -16,7 +16,7 @@ namespace WindowsFormsApp9
             this.Iter = Iter;
             this.StartColor = StartColor;
             this.EndColor = EndColor;
-            this.g = g;
+            this.grafika = g;
         }
         public Color[] Grad()
         {

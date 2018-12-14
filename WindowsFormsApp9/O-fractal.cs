@@ -23,53 +23,54 @@ namespace WindowsFormsApp9
             //Если итерация одна, то рисуем просто круг
             if (iter == 1)
             {
-                g.FillEllipse(new SolidBrush(colors[iter - 1]), R);
+                grafika.FillEllipse(new SolidBrush(colors[iter - 1]), R);
                 return 0;
             }
             else
             {
                 
-               g.FillEllipse(new SolidBrush(colors[iter - 1]), R);
+               grafika.FillEllipse(new SolidBrush(colors[iter - 1]), R);
 
                 
                 float d = (float)(size / 6.0); //Вспомогательная переменная, шестая длины исходного квадрата
-                PointF[] M = new PointF[7];  //Координаты левых верхних углов порожденных квадратов
+                PointF[] сoordinates = new PointF[7];  //Координаты левых верхних углов порожденных квадратов, а которые вписываются круги
 
                 for (int i = 0; i < 7; i++)
                 {
-                    M[i] = new PointF();
+                    сoordinates[i] = new PointF();
                 }
-                //Среднйи круг
-                M[6].X = A.X + size/3;
-                M[6].Y = A.Y + size/3;
+                // Координаты
+                //Средний круг
+                сoordinates[6].X = A.X + size/3;
+                сoordinates[6].Y = A.Y + size/3;
                 
-                //Левый верхний квадрат
-                M[0].X = A.X + (float)(size/2-d*(Math.Sqrt(3) + 1));
-                M[0].Y = A.Y + d;
+                //Левый верхний круг
+                сoordinates[0].X = A.X + (float)(size/2-d*(Math.Sqrt(3) + 1));
+                сoordinates[0].Y = A.Y + d;
 
-                //Левый нижний квадрат
-                M[5].X = A.X +(float)(size / 2 - d * (Math.Sqrt(3) + 1));
-                M[5].Y = A.Y + size/2;
-                //Верхний
-                M[4].X = A.X + size / 2 - d;
-                M[4].Y = A.Y ;
-                //Нижний
-                M[1].X = A.X + size / 2 - d;
-                M[1].Y = A.Y + size / 2 + d;
-                //Правый верхний квадрат
-                M[2].X = A.X + size/2 + d - (float)(size / 2 - d * (Math.Sqrt(3) + 1));
-                M[2].Y = A.Y + d;
+                //Левый нижний круг
+                сoordinates[5].X = A.X +(float)(size / 2 - d * (Math.Sqrt(3) + 1));
+                сoordinates[5].Y = A.Y + size/2;
+                //Верхний круг
+                сoordinates[4].X = A.X + size / 2 - d;
+                сoordinates[4].Y = A.Y ;
+                //Нижний круг
+                сoordinates[1].X = A.X + size / 2 - d;
+                сoordinates[1].Y = A.Y + size / 2 + d;
+                //Правый верхний круг
+                сoordinates[2].X = A.X + size/2 + d - (float)(size / 2 - d * (Math.Sqrt(3) + 1));
+                сoordinates[2].Y = A.Y + d;
 
-                //Правый нижний квадрат
-                M[3].X = A.X + +size / 2 + d - (float)(size / 2 - d * (Math.Sqrt(3) + 1));
-                M[3].Y = A.Y + +size / 2;
+                //Правый нижний круг
+                сoordinates[3].X = A.X + +size / 2 + d - (float)(size / 2 - d * (Math.Sqrt(3) + 1));
+                сoordinates[3].Y = A.Y + +size / 2;
                 
-                //Вызываем рекурсивно для каждого квадрата
+                //Вызываем рекурсивно для каждого круга
 
                 
                 for (int i = 0; i < 7; i++)
                 {
-                    Draw(M[i], size/3, iter - 1);
+                    Draw(сoordinates[i], size/3, iter - 1);
                 }
                 
                 return 0;
