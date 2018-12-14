@@ -22,7 +22,7 @@ namespace WindowsFormsApp9
                 return 0;
             }
             //g.FillEllipse
-            g.FillRectangle(new SolidBrush(colors[iter-1]), A.X, A.Y, size, size);
+            g.FillRectangle(new SolidBrush(colors[iter - 1]), A.X, A.Y, size, size);
             int d = size / 4; //Вспомогательная переменная, четверть длины исходного квадрата
             PointF[] M = new PointF[4];  //Координаты левых верхних углов порожденных квадратов
 
@@ -52,7 +52,7 @@ namespace WindowsFormsApp9
             {
                 Draw(M[i], size / 2, iter - 1);
             }
-            
+
             return 0;
         }
     }

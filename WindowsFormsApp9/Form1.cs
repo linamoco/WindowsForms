@@ -9,7 +9,7 @@ namespace WindowsFormsApp9
 {
     public partial class Form1 : Form
     {
-      
+
         public Form1()
         {
             InitializeComponent();
@@ -24,19 +24,19 @@ namespace WindowsFormsApp9
         private void ZoomIn()
         {
             SetZOOMFactor(true);
-            
-                pictureBox1.Width = Convert.ToInt32(pictureBox1.Width * zoomfactor);
-                pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * zoomfactor);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox1.Width = Convert.ToInt32(pictureBox1.Width * zoomfactor);
+            pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * zoomfactor);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void ZoomOut()
         {
             SetZOOMFactor(false);
 
-                pictureBox1.Width = Convert.ToInt32(pictureBox1.Width * zoomfactor);
-                pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * zoomfactor);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Width = Convert.ToInt32(pictureBox1.Width * zoomfactor);
+            pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * zoomfactor);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
         }
 
@@ -56,13 +56,13 @@ namespace WindowsFormsApp9
                 }
                 else if (zoom == 3)
                 {
-                    zoomfactor = 5/3.0;
+                    zoomfactor = 5 / 3.0;
                     zoom = 5;
                 }
                 else if (zoom == 5)
                 {
                     zoomfactor = 1;
-                    
+
                 }
             }
             else
@@ -75,33 +75,33 @@ namespace WindowsFormsApp9
                 }
                 else if (zoom == 2)
                 {
-                    
+
                     zoomfactor = 0.5;
                     zoom = 1;
-                    
+
                 }
                 else if (zoom == 3)
                 {
-                    zoomfactor = 2/3.0;
+                    zoomfactor = 2 / 3.0;
                     zoom = 2;
                 }
                 else if (zoom == 5)
                 {
-                    zoomfactor = 3/5.0;
+                    zoomfactor = 3 / 5.0;
                     zoom = 3;
 
                 }
             }
-            
+
         }
         private void panel1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta>0 )
+            if (e.Delta > 0)
             {
-                
+
                 ZoomIn();
             }
-           
+
             else
             {
                 ZoomOut();
@@ -114,9 +114,9 @@ namespace WindowsFormsApp9
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 flagmousebutton = true;
-              
-                    mouseX = e.X;
-                    mouseY = e.Y;
+
+                mouseX = e.X;
+                mouseY = e.Y;
 
                 this.Cursor = Cursors.Hand;
             }
@@ -140,9 +140,9 @@ namespace WindowsFormsApp9
                 int dy = e.Y - mouseY;
 
                 int sumx = control.Height - control.Height / 2;
-                
+
                 //if (pictureBox1.Location.X <= label1.Location.X + pictureBox1.Location.X/10)
-                    pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
+                pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
             }
         }
 
@@ -220,81 +220,139 @@ namespace WindowsFormsApp9
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (trackBar1.Value >= 14 || trackBar1.Value < 1)
-                MessageBox.Show("Заполните, пожалуйста, все поля");
-            else
+            try
             {
-                Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
-                H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
+                /*
+              Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
+              H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+              H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
+              */
+                Bitmap map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
+                Graphics gH = Graphics.FromHwnd(pictureBox1.Handle);
+                g = Graphics.FromImage(map); //Подключаем графику
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;//Включаем сглаживание
+                g.Clear(Color.Black);
+                if (comboBox1.SelectedIndex == 0)
+                {
+                    O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                    PointF A = new PointF(0, 0);
+                    O.Draw(A, pictureBox1.Height - 60, iter);
+                }
+                if (comboBox1.SelectedIndex == 1)
+                {
+                    T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+                    T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
 
-                /*
-                T_fractal T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-                T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+                }
+                if (comboBox1.SelectedIndex == 2)
+                {
+                    M = new MyFractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+                    M.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+                }
                 pictureBox1.BackgroundImage = map;
                 pictureBox1.Image = map;
-
-                /*
-                H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                H.Draw(pictureBox1.Size.Height/2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4);
-                pictureBox1.BackgroundImage = map;
-                pictureBox1.Image = map;
-                */
-                /*
-                O_fractal T = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-                PointF A = new PointF(0, 0);
-                T.Draw(A, pictureBox1.Height, iter);
-                pictureBox1.BackgroundImage = map;
-                pictureBox1.Image = map;
-                */
+                if (comboBox1.SelectedIndex == 3)
+                {
+                   
+                    H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, gH);
+                    H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
+                    map = (System.Drawing.Bitmap)pictureBox1.BackgroundImage;
+                    pictureBox1.Image = map;
+                }
 
             }
-
+            catch (IndexOutOfRangeException) { MessageBox.Show("Заполните, пожалуйста, все поля"); }
 
         }
+
+        O_fractal O;
+        T_fractal T;
+        MyFractal M;
+        H_fractal H;
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-           
+
         }
-       
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             Control control = (Control)sender;
             zoom = 1;
             zoomfactor = 2;
-        /*
-        if (control.Size.Height != control.Size.Width)
-        {
-            control.Size = new Size(control.Size.Height, control.Size.Width);
-        }
-        */
-        panel1.Width = control.Size.Height;
+            /*
+            if (control.Size.Height != control.Size.Width)
+            {
+                control.Size = new Size(control.Size.Height, control.Size.Width);
+            }
+            */
+
+
+            panel1.Width = control.Size.Height;
             panel1.Height = control.Size.Height;
             pictureBox1.Width = control.Size.Height;
             pictureBox1.Height = control.Size.Height;
             pictureBox2.Width = control.Size.Height;
             pictureBox2.Height = control.Size.Height;
-            /*
-           var map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
-           g = Graphics.FromImage(map); //Подключаем графику
-           g.Clear(Color.Black);
-           T_fractal T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
-           PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
-           T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
-           pictureBox1.BackgroundImage = map;
-           pictureBox1.Image = map;
+            try
+            {
+                /*
+              Graphics g = Graphics.FromHwnd(pictureBox1.Handle);
+              H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+              H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
+              */
+                Bitmap map = new Bitmap(pictureBox1.Width, pictureBox1.Height);//Подключаем Битмап
+                Graphics gH = Graphics.FromHwnd(pictureBox1.Handle);
+                g = Graphics.FromImage(map); //Подключаем графику
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;//Включаем сглаживание
+                g.Clear(Color.Black);
+                if (comboBox1.SelectedIndex == 0)
+                {
+                    O = new O_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                    PointF A = new PointF(0, 0);
+                    O.Draw(A, pictureBox1.Height - 60, iter);
+                }
+                if (comboBox1.SelectedIndex == 1)
+                {
+                    T = new T_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+                    T.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
 
-           */
+                }
+                if (comboBox1.SelectedIndex == 2)
+                {
+                    M = new MyFractal(trackBar1.Value, button1.BackColor, button2.BackColor, g);
+                    PointF A = new PointF(pictureBox1.Width / 2 - pictureBox1.Height / 4, pictureBox1.Height / 4);
+                    M.Draw(A, pictureBox1.Height / 2 - pictureBox1.Height / 10, iter);
+                }
+                pictureBox1.BackgroundImage = map;
+                pictureBox1.Image = map;
+                if (comboBox1.SelectedIndex == 3)
+                {
 
-           
+                    H_fractal H = new H_fractal(trackBar1.Value, button1.BackColor, button2.BackColor, gH);
+                    H.Draw(pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 2, pictureBox1.Size.Height / 4, iter);
+                    map = (System.Drawing.Bitmap)pictureBox1.BackgroundImage;
+                    pictureBox1.Image = map;
+                }
+
+            }
+            catch (IndexOutOfRangeException) { MessageBox.Show("Заполните, пожалуйста, все поля"); }
 
         }
-
-
-
     }
+    
 }
+
+
+
+
     
 

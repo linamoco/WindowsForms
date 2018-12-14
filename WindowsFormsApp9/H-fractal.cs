@@ -39,7 +39,7 @@ namespace WindowsFormsApp9
             y00 = y1 - razm_f;
 
 
-            if (Iter == 1)
+            if (iter <= 1)
             {
 
                 H(x1, y1, razm_f);
@@ -49,10 +49,10 @@ namespace WindowsFormsApp9
             }
             else
             {
-                Draw(x11, y11, razm_f, Iter  -1);
-                Draw(x01, y01, razm_f, Iter  -1);
-                Draw(x10, y10, razm_f, Iter - 1);
-                Draw(x00, y00, razm_f, Iter - 1);
+                Draw(x11, y11, razm_f, iter  -1);
+                Draw(x01, y01, razm_f, iter  -1);
+                Draw(x10, y10, razm_f, iter - 1);
+                Draw(x00, y00, razm_f, iter - 1);
             }
             return 0;
     
